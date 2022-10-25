@@ -1,6 +1,5 @@
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -8,8 +7,8 @@ import java.util.stream.Collectors;
  */
 public class GreaterThanMeanPlusDeviation implements DecisionStrategy{
 
-    private List<Integer> rolls = new LinkedList<>();
-    private int measuringThreshold;
+    List<Integer> rolls = new LinkedList<>();
+    int measuringThreshold;
 
     public GreaterThanMeanPlusDeviation(int measuringThreshold) {
         this.measuringThreshold = measuringThreshold;
@@ -24,9 +23,9 @@ public class GreaterThanMeanPlusDeviation implements DecisionStrategy{
         return name;
     }
 
-    private double getMean() { return rolls.stream().collect(Collectors.averagingInt(x -> x)); }
+    double getMean() { return rolls.stream().collect(Collectors.averagingInt(x -> x)); }
 
-    private double getDeviation() {
+    double getDeviation() {
             Double deviationSum = rolls.stream().map(x -> Math.pow(x - getMean(), 2)).reduce(Double::sum).orElse(0.0);
             return rolls.isEmpty() ? 100000.0 : Math.sqrt(deviationSum / rolls.size());
         }
