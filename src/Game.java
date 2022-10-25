@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
@@ -56,16 +57,12 @@ public class Game {
         return (int) (randomGenerator.nextGaussian(winMean, winDeviation));
     }
 
-    /**
-     * Decision-making
-     * @return boolean: ture ends the game and takes the win of the round
-     */
-    private boolean takeIt(double currentWin) {
-        return true;
-    }
-
     public DecisionStrategy getStrategy() {
         return strategy;
+    }
+
+    public static List<Game> setUpGames(int rounds, int winMean, int winDeviation, List<DecisionStrategy> strategies) {
+        return strategies.stream().map(strategy -> new Game(rounds, winMean, winDeviation, strategy)).toList();
     }
 }
 

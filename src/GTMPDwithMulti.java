@@ -13,5 +13,5 @@ public class GTMPDwithMulti extends GreaterThanMeanPlusDeviation implements Deci
         return super.rolls.size() <= super.measuringThreshold ? false : roll > (super.getMean() + super.getDeviation()) * multiplier;
     }
 
-    public String getName() { return name; }
+    public String getName() { return name +": " + multiplier; }
 }
