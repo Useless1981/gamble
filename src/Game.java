@@ -41,7 +41,7 @@ public class Game {
     public int play() {
         for (int round = 1; round <= rounds; round++) {
             int roll = rollWin();
-            if (strategy.decide(this, roll) || round == rounds) {
+            if (strategy.decide(roll) || round == rounds) {
                 return roll;
             }
         }

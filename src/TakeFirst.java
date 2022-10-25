@@ -4,7 +4,7 @@
 public final class TakeFirst implements DecisionStrategy {
 
     final String name = "Take first win";
-    public boolean decide(Game game, int roll) { return true;}
+    public boolean decide(int roll) { return true;}
 
     public String getName() {
         return name;
