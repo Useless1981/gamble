@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 /**
  * This strategy  takes the win, if it is greater than mean + deviation of the current game.
  */
-public class GreaterThanMeanPlusDeviation implements DecisionStrategy{
+public class GreaterThanMeanPlusDeviation implements DecisionStrategy {
 
     List<Integer> rolls = new LinkedList<>();
     int measuringThreshold;
