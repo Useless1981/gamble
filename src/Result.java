@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Result-class
@@ -39,5 +40,9 @@ public class Result {
                 "\tStrategy: " + usedStrategy +
                 "\n\tMean: " + getMean() +
                 "\n\tDeviation: " + getDeviation() + "\n";
+    }
+
+    public static String encodeToCsv(List<Result> results) {
+        return results.stream().map(result -> result.usedStrategy + "," + result.getMean()+ "," + result.getDeviation()).reduce(((result1, result2) -> result1 + "\n" + result2)).orElse("");
     }
 }
