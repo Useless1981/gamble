@@ -28,6 +28,13 @@ public class GreaterThanMeanPlusDeviation implements DecisionStrategy {
     double getDeviation() {
             Double deviationSum = rolls.stream().map(x -> Math.pow(x - getMean(), 2)).reduce(Double::sum).orElse(0.0);
             return rolls.isEmpty() ? 100000.0 : Math.sqrt(deviationSum / rolls.size());
-        }
+    }
 
+    public static List<GreaterThanMeanPlusDeviation> withAllResonalbeMeasuringThresholds() {
+        List<GreaterThanMeanPlusDeviation> strategies = new LinkedList<>();
+        for (int threshold = 2; threshold < 49; threshold++) {
+            strategies.add(new GreaterThanMeanPlusDeviation(threshold));
+        }
+        return strategies;
+    }
 }
