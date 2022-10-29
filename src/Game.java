@@ -6,19 +6,11 @@ import java.util.random.RandomGenerator;
  * Representation af a game. Can be Played via Player-class.
  */
 public class Game {
+
     final private int rounds;
     final private int winMean;
     final private int winDeviation;
     final RandomGenerator randomGenerator = new Random();
-
-    public int getWinMean() {
-        return winMean;
-    }
-
-    public int getWinDeviation() {
-        return winDeviation;
-    }
-
     final private DecisionStrategy strategy;
 
     /**
@@ -46,7 +38,7 @@ public class Game {
                 return roll;
             }
         }
-        return -1; // Should never be returned. ToDO: better solution to skip this return
+        return -1;
     }
 
     /**

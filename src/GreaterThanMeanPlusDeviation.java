@@ -9,15 +9,22 @@ public class GreaterThanMeanPlusDeviation implements DecisionStrategy {
 
     List<Integer> rolls = new LinkedList<>();
     int measuringThreshold;
+    double mean;
+    double deviation;
 
     public GreaterThanMeanPlusDeviation(int measuringThreshold) {
         this.measuringThreshold = measuringThreshold;
     }
 
     final String name = "Greater than mean plus deviation";
+
     public boolean decide(int roll) {
         rolls.add(roll);
-        return rolls.size() <= measuringThreshold ? false : roll > getMean() + getDeviation(); }
+        if(rolls.size() == measuringThreshold) {
+            mean = getMean();
+            deviation = getDeviation();
+        }
+        return rolls.size() > measuringThreshold && roll > mean + deviation; }
 
     public String getName() {
         return name;

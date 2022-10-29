@@ -45,7 +45,7 @@ public class Result {
     }
 
     public static String encodeToCsv(List<Result> results) {
-        return "Strategy,Mean,Deviation\n" + results.stream().map(result -> result.usedStrategy + "," + result.getMean()+ "," + result.getDeviation()).reduce(((result1, result2) -> result1 + "\n" + result2)).orElse("");
+        return "Strategy,Mean\n" + results.stream().map(result -> result.usedStrategy + "," + result.getMean()).reduce(((result1, result2) -> result1 + "\n" + result2)).orElse("");
     }
 
     public static void writeToFile(String toWrite, String fileName) throws IOException {
