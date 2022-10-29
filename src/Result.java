@@ -1,5 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Result-class
@@ -43,6 +45,12 @@ public class Result {
     }
 
     public static String encodeToCsv(List<Result> results) {
-        return results.stream().map(result -> result.usedStrategy + "," + result.getMean()+ "," + result.getDeviation()).reduce(((result1, result2) -> result1 + "\n" + result2)).orElse("");
+        return "Strategy,Mean,Deviation\n" + results.stream().map(result -> result.usedStrategy + "," + result.getMean()+ "," + result.getDeviation()).reduce(((result1, result2) -> result1 + "\n" + result2)).orElse("");
+    }
+
+    public static void writeToFile(String toWrite, String fileName) throws IOException {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            writer.write(toWrite);
+            writer.close();
     }
 }
