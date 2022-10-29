@@ -21,9 +21,9 @@ public class Main {
         List<Game> measuringThresholdGameSet2 = Game.setUpGames(50, 50, 18, strategies);
 
         // Play games
-        List<Result> measuringThresholdResult0 = measuringThresholdGameSet0.stream().map(game -> Player.play(game, 100)).toList();
-        List<Result> measuringThresholdResult1 = measuringThresholdGameSet1.stream().map(game -> Player.play(game, 100)).toList();
-        List<Result> measuringThresholdResult2 = measuringThresholdGameSet2.stream().map(game -> Player.play(game, 100)).toList();
+        List<Result> measuringThresholdResult0 = measuringThresholdGameSet0.stream().map(game -> Player.play(game, 1000)).toList();
+        List<Result> measuringThresholdResult1 = measuringThresholdGameSet1.stream().map(game -> Player.play(game, 1000)).toList();
+        List<Result> measuringThresholdResult2 = measuringThresholdGameSet2.stream().map(game -> Player.play(game, 1000)).toList();
 
         try {
             Result.writeToFile(Result.encodeToCsv(measuringThresholdResult0), "GameSet0.csv");

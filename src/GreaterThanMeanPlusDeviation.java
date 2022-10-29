@@ -24,7 +24,12 @@ public class GreaterThanMeanPlusDeviation implements DecisionStrategy {
             mean = getMean();
             deviation = getDeviation();
         }
-        return rolls.size() > measuringThreshold && roll > mean + deviation; }
+        if(rolls.size() > measuringThreshold && roll > mean + deviation) {
+            rolls.clear();
+            return true;
+        }
+        return false;
+    }
 
     public String getName() {
         return name;
