@@ -35,6 +35,7 @@ public class Game {
         for (int round = 1; round <= rounds; round++) {
             int roll = rollWin();
             if (strategy.decide(roll) || round == rounds) {
+                strategy.reset();
                 return roll;
             }
         }
