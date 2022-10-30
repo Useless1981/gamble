@@ -15,5 +15,8 @@ interface DecisionStrategy {
         return name;
     }
 
+    /**
+     * Resets all store data of this object
+     */
     void reset();
 }
