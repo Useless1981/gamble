@@ -24,11 +24,24 @@ public class Main {
         List<Result> measuringThresholdResult0 = measuringThresholdGameSet0.stream().map(game -> Player.play(game, 1000)).toList();
         List<Result> measuringThresholdResult1 = measuringThresholdGameSet1.stream().map(game -> Player.play(game, 1000)).toList();
         List<Result> measuringThresholdResult2 = measuringThresholdGameSet2.stream().map(game -> Player.play(game, 1000)).toList();
-
+/*
         try {
             Result.writeToFile(Result.encodeToCsv(measuringThresholdResult0), "GameSet0.csv");
             Result.writeToFile(Result.encodeToCsv(measuringThresholdResult1), "GameSet1.csv");
             Result.writeToFile(Result.encodeToCsv(measuringThresholdResult2), "GameSet2.csv");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+*/
+
+        // Set up Games to Play
+        List<Game> takeFirstValues0 = Game.setUpGames(50, 100, 35, List.of(new TakeFirst()));
+        List<Game> takeFirstValues1 = Game.setUpGames(50, 200, 45, List.of(new TakeFirst()));
+        List<Game> takeFirstValues2 = Game.setUpGames(50, 50, 18, List.of(new TakeFirst()));
+        try {
+            Result.writeValuesToCsv(measuringThresholdResult0, "TakeFirstValues0.csv");
+            Result.writeValuesToCsv(measuringThresholdResult0, "TakeFirstValues1.csv");
+            Result.writeValuesToCsv(measuringThresholdResult0, "TakeFirstValues2.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
