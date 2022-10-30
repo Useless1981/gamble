@@ -47,7 +47,7 @@ public class Game {
      * @return double: win
      */
     private int rollWin() {
-        return (int) (randomGenerator.nextGaussian(winMean, winDeviation));
+        return Math.max((int) (randomGenerator.nextGaussian(winMean, winDeviation)), 0);
     }
 
     public DecisionStrategy getStrategy() {
