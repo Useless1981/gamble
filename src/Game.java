@@ -50,10 +50,22 @@ public class Game {
         return Math.max((int) (randomGenerator.nextGaussian(winMean, winDeviation)), 0);
     }
 
+    /**
+     * Strategy getter
+     * @return DecisionStrategy: used Strategy
+     */
     public DecisionStrategy getStrategy() {
         return strategy;
     }
 
+    /**
+     *  Sets up multiple game with different strategies
+     * @param rounds int: rounds a game to last
+     * @param winMean int: mean of the win in each round
+     * @param winDeviation int: deviation of the win in each round
+     * @param strategies List<DecisionStrategy>: strategies, how to play the games
+     * @return List<Game>: List of Games
+     */
     public static List<Game> setUpGames(int rounds, int winMean, int winDeviation, List<DecisionStrategy> strategies) {
         return strategies.stream().map(strategy -> new Game(rounds, winMean, winDeviation, strategy)).toList();
     }

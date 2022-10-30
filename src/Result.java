@@ -45,25 +45,47 @@ public class Result {
                 "\n\tDeviation: " + getDeviation() + "\n";
     }
 
+    /**
+     * Encodes a list of Results to a csv file
+     * @param results List<Result>: List of Results
+     * @return String: Results as valid csv String
+     */
     public static String encodeToCsv(List<Result> results) {
         return "Strategy,Mean\n" + results.stream().map(result -> result.usedStrategy + "," + result.getMean()).reduce(((result1, result2) -> result1 + "\n" + result2)).orElse("");
     }
 
-    public static void writeToFile(String toWrite, String fileName) throws IOException {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-            writer.write(toWrite);
-            writer.close();
-    }
-
+    /**
+     * Encodes the values of list of Results to a csv file
+     * @param results List<Result>: List of Results
+     * @return String: Results as valid csv String
+     */
     public static String encodeValuesToCsv(List<Result> results) {
         return "Values\n" + results.stream().map(Result::getValues).flatMap(List::stream).map(Object::toString).collect(Collectors.joining("\n"));
     }
 
+    /**
+     * Encodes and writes a results to a csv file
+     * @param results List<Result>: Results to export
+     * @param fileName String: Filename
+     * @throws IOException
+     */
     public static void writeValuesToCsv(List<Result> results, String fileName) throws IOException {
         writeToFile(encodeValuesToCsv(results), fileName);
     }
 
     public List<Integer> getValues() {
         return this.resultList;
+    }
+
+    /**
+     * Writes a file to active dir
+     * @param toWrite String: String to write
+     * @param fileName String: Filename
+     * @throws IOException
+     */
+    public static void writeToFile(String toWrite, String fileName) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        writer.write(toWrite);
+        writer.close();
     }
 }

@@ -23,6 +23,12 @@ public class GTMPDWithMulti extends GreaterThanMeanPlusDeviation implements Deci
         return name +": " + multiplier;
     }
 
+    /**
+     * Factory method to produce multiple GTMPWithMulti with given multipliers
+     * @param measuringThreshold int: rolls to be seen
+     * @param multipliers List<Double>: multiplier to be used
+     * @return List<GTMPDWithMulti>: List of strategies with different multiplier
+     */
     public static List<GTMPDWithMulti> withMultipliers(int measuringThreshold, List<Double> multipliers) {
         return multipliers.stream().map(multiplier -> new GTMPDWithMulti(measuringThreshold, multiplier)).toList();
     }

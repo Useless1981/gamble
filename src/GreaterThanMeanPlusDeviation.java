@@ -35,10 +35,18 @@ public class GreaterThanMeanPlusDeviation implements DecisionStrategy {
         return name;
     }
 
+    /**
+     * Returns the mean of all seen rolls
+     * @return double: mean of seen rolls
+     */
     double getMean() {
         return rolls.stream().collect(Collectors.averagingInt(x -> x));
     }
 
+    /**
+     * Returns the deviation of all seen rolls
+     * @return double: deviation of seen rolls
+     */
     double getDeviation() {
             Double deviationSum = rolls.stream().map(x -> Math.pow(x - getMean(), 2)).reduce(Double::sum).orElse(0.0);
             return Math.sqrt(deviationSum / rolls.size());
