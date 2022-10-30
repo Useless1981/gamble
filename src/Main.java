@@ -50,8 +50,34 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        // Set up Games to Play
+        List<Game> onePointTwo = Game.setUpGames(50, 100, 35, List.of(new GTMPDWithMulti(25, 1.2)));
+        List<Game> onePointFour = Game.setUpGames(50, 100, 35, List.of(new GTMPDWithMulti(25, 1.4)));
+        List<Game> onePointSix = Game.setUpGames(50, 100, 35, List.of(new GTMPDWithMulti(25, 1.6)));
+        List<Game> onePointEight = Game.setUpGames(50, 100, 35, List.of(new GTMPDWithMulti(25, 1.8)));
+        List<Game> twoPointZero = Game.setUpGames(50, 100, 35, List.of(new GTMPDWithMulti(25, 2.0)));
+
+        // Play games
+        List<Result> onePointTwoValues = onePointTwo.stream().map(game -> Player.play(game, 1000)).toList();
+        List<Result> onePointFourValues = onePointFour.stream().map(game -> Player.play(game, 1000)).toList();
+        List<Result> onePointSixValues = onePointSix.stream().map(game -> Player.play(game, 1000)).toList();
+        List<Result> onePointEightValues = onePointEight.stream().map(game -> Player.play(game, 1000)).toList();
+        List<Result> twoPointZeroValues = twoPointZero.stream().map(game -> Player.play(game, 1000)).toList();
+
+        try {
+            Result.writeValuesToCsv(onePointTwoValues, "onePointTwoValues.csv");
+            Result.writeValuesToCsv(onePointFourValues, "onePointFourValues.csv");
+            Result.writeValuesToCsv(onePointSixValues, "onePointSixValues.csv");
+            Result.writeValuesToCsv(onePointEightValues, "onePointEightValues.csv");
+            Result.writeValuesToCsv(twoPointZeroValues, "twoPointZeroValues.csv");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
+
+
 
 
 
