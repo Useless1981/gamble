@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Result-class
@@ -52,5 +53,17 @@ public class Result {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             writer.write(toWrite);
             writer.close();
+    }
+
+    public static String encodeValuesToCsv(List<Result> results) {
+        return "Values\n" + results.stream().map(Result::getValues).flatMap(List::stream).map(Object::toString).collect(Collectors.joining("\n"));
+    }
+
+    public static void writeValuesToCsv(List<Result> results, String fileName) throws IOException {
+        writeToFile(encodeValuesToCsv(results), fileName);
+    }
+
+    public List<Integer> getValues() {
+        return this.resultList;
     }
 }
