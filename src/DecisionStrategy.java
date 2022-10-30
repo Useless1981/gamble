@@ -14,4 +14,6 @@ interface DecisionStrategy {
     default String getName() {
         return name;
     }
+
+    void reset();
 }

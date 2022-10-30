@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
  */
 public class GreaterThanMeanPlusDeviation implements DecisionStrategy {
 
+    final String name = "Greater than mean plus deviation";
+
     List<Integer> rolls = new LinkedList<>();
     int measuringThreshold;
     double mean;
@@ -16,37 +18,29 @@ public class GreaterThanMeanPlusDeviation implements DecisionStrategy {
         this.measuringThreshold = measuringThreshold;
     }
 
-    final String name = "Greater than mean plus deviation";
-
     public boolean decide(int roll) {
         rolls.add(roll);
         if(rolls.size() == measuringThreshold) {
             mean = getMean();
             deviation = getDeviation();
         }
-        if(rolls.size() > measuringThreshold && roll > mean + deviation) {
-            rolls.clear();
-            return true;
-        }
-        return false;
+        return rolls.size() > measuringThreshold && roll > mean + deviation;
+    }
+
+    public void reset() {
+        rolls.clear();
     }
 
     public String getName() {
         return name;
     }
 
-    double getMean() { return rolls.stream().collect(Collectors.averagingInt(x -> x)); }
+    double getMean() {
+        return rolls.stream().collect(Collectors.averagingInt(x -> x));
+    }
 
     double getDeviation() {
             Double deviationSum = rolls.stream().map(x -> Math.pow(x - getMean(), 2)).reduce(Double::sum).orElse(0.0);
-            return rolls.isEmpty() ? 100000.0 : Math.sqrt(deviationSum / rolls.size());
-    }
-
-    public static List<GreaterThanMeanPlusDeviation> withAllResonalbeMeasuringThresholds() {
-        List<GreaterThanMeanPlusDeviation> strategies = new LinkedList<>();
-        for (int threshold = 2; threshold < 49; threshold++) {
-            strategies.add(new GreaterThanMeanPlusDeviation(threshold));
-        }
-        return strategies;
+            return Math.sqrt(deviationSum / rolls.size());
     }
 }

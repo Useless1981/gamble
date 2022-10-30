@@ -2,8 +2,8 @@ import java.util.List;
 
 public class GTMPDWithMulti extends GreaterThanMeanPlusDeviation implements DecisionStrategy {
 
-    private final double multiplier;
     final String name = "Greater than mean plus deviation with multiplicator";
+    private final double multiplier;
 
     public GTMPDWithMulti(int measuringThreshold, double multiplier) {
         super(measuringThreshold);
@@ -16,14 +16,12 @@ public class GTMPDWithMulti extends GreaterThanMeanPlusDeviation implements Deci
             mean = getMean();
             deviation = getDeviation();
         }
-        if(rolls.size() > measuringThreshold && roll > mean + deviation * multiplier) {
-            rolls.clear();
-            return true;
-        }
-        return false;
+        return rolls.size() > measuringThreshold && roll > mean + deviation * multiplier;
     }
 
-    public String getName() { return name +": " + multiplier; }
+    public String getName() {
+        return name +": " + multiplier;
+    }
 
     public static List<GTMPDWithMulti> withMultipliers(int measuringThreshold, List<Double> multipliers) {
         return multipliers.stream().map(multiplier -> new GTMPDWithMulti(measuringThreshold, multiplier)).toList();
