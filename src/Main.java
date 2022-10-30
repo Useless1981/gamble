@@ -24,7 +24,8 @@ public class Main {
         List<Result> measuringThresholdResult0 = measuringThresholdGameSet0.stream().map(game -> Player.play(game, 1000)).toList();
         List<Result> measuringThresholdResult1 = measuringThresholdGameSet1.stream().map(game -> Player.play(game, 1000)).toList();
         List<Result> measuringThresholdResult2 = measuringThresholdGameSet2.stream().map(game -> Player.play(game, 1000)).toList();
-/*
+
+        // Exporting Results
         try {
             Result.writeToFile(Result.encodeToCsv(measuringThresholdResult0), "GameSet0.csv");
             Result.writeToFile(Result.encodeToCsv(measuringThresholdResult1), "GameSet1.csv");
@@ -32,9 +33,10 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-*/
 
-        // Set up Games to Play
+        // Generating data for visualisation
+
+        // Set up Games to Play - TakeFirst
         List<Game> takeFirstValuesGame0 = Game.setUpGames(50, 100, 35, List.of(new TakeFirst()));
         List<Game> takeFirstValuesGame1 = Game.setUpGames(50, 200, 45, List.of(new TakeFirst()));
         List<Game> takeFirstValuesGame2 = Game.setUpGames(50, 50, 18, List.of(new TakeFirst()));
@@ -43,6 +45,8 @@ public class Main {
         List<Result> takeFirstValues0 = takeFirstValuesGame0.stream().map(game -> Player.play(game, 1000)).toList();
         List<Result> takeFirstValues1 = takeFirstValuesGame1.stream().map(game -> Player.play(game, 1000)).toList();
         List<Result> takeFirstValues2 = takeFirstValuesGame2.stream().map(game -> Player.play(game, 1000)).toList();
+
+        // Exporting Results
         try {
             Result.writeValuesToCsv(takeFirstValues0, "TakeFirstValues0.csv");
             Result.writeValuesToCsv(takeFirstValues1, "TakeFirstValues1.csv");
@@ -51,7 +55,7 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        // Set up Games to Play
+        // Set up Games to Play - GTMPDWithMulti
         List<Game> onePointTwo = Game.setUpGames(50, 100, 35, List.of(new GTMPDWithMulti(25, 1.2)));
         List<Game> onePointFour = Game.setUpGames(50, 100, 35, List.of(new GTMPDWithMulti(25, 1.4)));
         List<Game> onePointSix = Game.setUpGames(50, 100, 35, List.of(new GTMPDWithMulti(25, 1.6)));
@@ -65,6 +69,7 @@ public class Main {
         List<Result> onePointEightValues = onePointEight.stream().map(game -> Player.play(game, 1000)).toList();
         List<Result> twoPointZeroValues = twoPointZero.stream().map(game -> Player.play(game, 1000)).toList();
 
+        // Exporting Results
         try {
             Result.writeValuesToCsv(onePointTwoValues, "onePointTwoValues.csv");
             Result.writeValuesToCsv(onePointFourValues, "onePointFourValues.csv");
